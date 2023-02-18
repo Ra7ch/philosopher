@@ -25,14 +25,21 @@ typedef struct s_table
 	int				eaten;
 	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	dead_lock;
-	int				between_eating;
-	int				*philo_dead;
-	int				death_limit;
-	int				eat_time;
-	int				sleep_time;
-	int				eat_limiter;
-	int				time;
+	pthread_mutex_t	lock1;
+	pthread_mutex_t	lock2;
+	pthread_mutex_t	lock3;
+	time_t			between_eating;
+	int				philo_dead;
+	time_t			death_limit;
+	time_t			eat_time;
+	time_t			sleep_time;
+	time_t			eat_limiter;
+	time_t			time;
+	struct s_table	*first;
 	int				philo_count;
+	int				i;
+	int				j;
+	int				k;
 }					t_table;
 
 #endif
