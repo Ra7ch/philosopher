@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:40:50 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/02 17:52:55 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:22:24 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ void	philo_processes(t_table *p, t_sem *sem, pid_t *pid)
 	while (i < p->philo_count)
 	{
 		p->time = sem->time;
-		sem_unlink(ft_itoa(i));
-		p->th = sem_open(ft_itoa(i), O_CREAT, 0644, 1);
 		pid[i] = ft_fork(p, sem->ph, sem->d, sem->wait);
 		p = p->left;
 		i++;
@@ -123,6 +121,8 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc == 5 || argc == 6)
 	{
+		if (check_arg(argv) == 0)
+			return (0);
 		p = build_table(atoi(argv[1]), argv, argc);
 		pid = malloc(sizeof(pid_t) * (p->philo_count));
 		tmp = p;
@@ -135,7 +135,5 @@ int	main(int argc, char **argv)
 		sem_close(sem.d);
 	}
 	else
-		printf("Unvalid number of arguments\n");
+		printf("ERROR:\nUnvalid number of arguments.\n");
 }
-
-//now they are stuck when there is no forks and each holds one;

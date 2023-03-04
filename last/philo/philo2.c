@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:58:09 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/03 22:17:16 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:24:32 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ int	get_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-time_t	get_time_us(struct timeval end, struct timeval start)
-{
-	return ((end.tv_sec * 1000 + end.tv_usec / 1000) - (start.tv_sec * 1000
-			+ start.tv_usec / 1000));
-}
-
 void	eat_timer(time_t time)
 {
 	struct timeval	end;
@@ -63,7 +57,7 @@ void	eat_timer(time_t time)
 	while (1)
 	{
 		gettimeofday(&end, NULL);
-		if (get_time_us(end, start) >= time)
+		if (ft_time(start, end) >= time)
 			break ;
 		usleep(100);
 	}

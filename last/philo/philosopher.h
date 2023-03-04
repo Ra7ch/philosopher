@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:41:37 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 13:07:52 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 14:31:40 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void				eat_timer(time_t time);
 void				*philo(void *ph);
 int					only_one_philo(t_table *p);
 int					check_if_filled(t_table *p, int limit);
-void				philo2(void *ph, int i);
+void				philo2(t_table *p, int i);
+time_t				ft_time(struct timeval a, struct timeval b);
+int					check_arg(char **argv);
 
 #endif

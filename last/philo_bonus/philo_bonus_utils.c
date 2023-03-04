@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 19:02:36 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/01 13:23:37 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:27:14 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,62 +58,14 @@ int	ft_atoi(const char *str)
 	return (r);
 }
 
-static int	ft_len(long n)
+void	only_one_philo(t_table *p, sem_t *wait)
 {
-	int	i;
-
-	i = 0;
-	if (n < 0)
+	if (p->philo_count == 1)
 	{
-		i = 1;
-		n = -n;
+		printf("%ld %d is thinking\n", get_time() - p->time, 1);
+		time_frame(p->death_limit, get_time());
+		printf("%ld %d died\n", get_time() - p->time, 1);
+		sem_post(wait);
+		exit(0);
 	}
-	while (n >= 10)
-	{
-		n = n / 10;
-		i++;
-	}
-	if (n < 10)
-		i++;
-	return (i);
-}
-
-static char	*ftitoa(long c, char *s)
-{
-	while (c >= 10)
-	{
-		*s = c % 10 + 48;
-		c = c / 10;
-		s--;
-	}
-	if (c < 10)
-		*s = c + 48;
-	return (s);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*s;
-	int		i;
-	long	c;
-	int		w;
-
-	i = 0;
-	c = n;
-	s = malloc(ft_len(n) + 1);
-	if (!s)
-		return (0);
-	if (c < 0)
-	{
-		*s = '-';
-		s++;
-		c = -c;
-	}
-	w = ft_len(c);
-	s = s + ft_len(c) - 1;
-	s = ftitoa(c, s);
-	s[w] = 0;
-	if (n < 0)
-		s--;
-	return (s);
 }

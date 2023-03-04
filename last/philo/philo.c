@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:27:30 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 13:07:46 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:21:11 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,13 @@ int	hold_forks(t_table *p)
 	pthread_mutex_lock(&(p->left->fork));
 	pthread_mutex_lock(&(p->eat_lock));
 	pthread_mutex_lock(&(p->first->lock1));
-	printf("%ld %d has taken a fork\n", get_time() - p->time,
-			p->philo);
+	printf("%ld %d has taken a fork\n", get_time() - p->time, p->philo);
 	pthread_mutex_unlock(&(p->first->lock1));
 	pthread_mutex_unlock(&(p->eat_lock));
 	pthread_mutex_lock(&(p->fork));
 	pthread_mutex_lock(&(p->eat_lock));
 	pthread_mutex_lock(&(p->first->lock1));
-	printf("%ld %d has taken a fork\n", get_time() - p->time,
-			p->philo);
+	printf("%ld %d has taken a fork\n", get_time() - p->time, p->philo);
 	pthread_mutex_unlock(&(p->first->lock1));
 	pthread_mutex_unlock(&(p->eat_lock));
 	pthread_mutex_lock(&(p->eat_lock));
@@ -88,14 +86,11 @@ time_t	ft_time(struct timeval a, struct timeval b)
 	return (sum);
 }
 
-void	philo2(void *ph, int i)
+void	philo2(t_table *p, int i)
 {
-	t_table			*p;
 	struct timeval	c;
 	int				j;
 
-	j = 0;
-	p = (t_table *)ph;
 	while (1)
 	{
 		gettimeofday(&c, NULL);
@@ -118,5 +113,4 @@ void	philo2(void *ph, int i)
 		}
 		usleep(100);
 	}
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:41:10 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/02 17:50:46 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 13:28:52 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ pid_t	ft_fork(t_table *p, sem_t *ph, sem_t *d, sem_t *wait)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (p->philo % 2 == 0)
-			usleep(10000);
 		only_one_philo(p, wait);
 		p->d = d;
 		p->wait = wait;

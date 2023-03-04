@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:12:34 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/01 21:31:40 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:16:30 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int					check_if_filled(t_table *p, int limit, sem_t *wait,
 						sem_t *ph);
 void				only_one_philo(t_table *p, sem_t *wait);
 void				*philo(void *ph);
-char				*ft_itoa(int n);
+int					check_arg(char **argv);
 
 #endif

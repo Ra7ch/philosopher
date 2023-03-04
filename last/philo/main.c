@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:42:29 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 13:09:18 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:18:00 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	threads_create(int count, char **argv, int argc)
 	t_table		*p;
 
 	i = 0;
+	if (check_arg(argv) == 0)
+		return ;
 	p = build_table(count, argv, argc);
 	th = malloc(count * sizeof(pthread_t));
 	tmp = p;
@@ -117,5 +119,5 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	else
-		printf("Unvalid number of arguments\n");
+		printf("ERROR:\nUnvalid number of arguments.\n");
 }

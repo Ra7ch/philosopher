@@ -6,11 +6,11 @@
 #    By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/03 23:18:25 by raitmous          #+#    #+#              #
-#    Updated: 2023/03/03 23:38:15 by raitmous         ###   ########.fr        #
+#    Updated: 2023/03/04 14:31:56 by raitmous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= main.c philo_utils.c philo.c philo2.c
+SRCS	= main.c philo_utils.c philo.c philo2.c parsing.c
 OBJS	= ${SRCS:.c=.o}
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
