@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 21:12:34 by raitmous          #+#    #+#             */
-/*   Updated: 2023/02/26 21:23:09 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/03/04 15:16:30 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_fork
 typedef struct s_table
 {
 	int				philo;
-	int				fork_lock;
+
 	struct s_table	*right;
 	struct s_table	*left;
 	int				eaten;
@@ -52,6 +52,12 @@ typedef struct s_table
 	sem_t			*check_dead;
 	sem_t			*dead;
 	pid_t			pid;
+	sem_t			*wait;
+	sem_t			*d;
+	sem_t			*th;
+	sem_t			*ph;
+	struct timeval	b_eat;
+	pthread_mutex_t	fork;
 }					t_table;
 
 typedef struct s_sem
@@ -62,16 +68,25 @@ typedef struct s_sem
 	time_t			time;
 }					t_sem;
 
+typedef struct s_all
+{
+	struct s_table	*p;
+	sem_t			*d;
+	sem_t			*wait;
+}					t_all;
+
 pid_t				ft_fork(t_table *p, sem_t *ph, sem_t *d, sem_t *wait);
 int					ft_atoi(const char *str);
 int					get_time(void);
 void				philo_eating(t_table *p, sem_t *d, sem_t *ph, sem_t *wait);
-void				hold_forks(t_table *p, sem_t *d, sem_t *ph);
+void				hold_forks(t_table *p, sem_t *d, sem_t *ph, sem_t *wait);
 void				after_eating(t_table *p, sem_t *d);
 void				time_frame(time_t limite, time_t time);
 void				wait_sem(t_table *p, sem_t *wait);
 int					check_if_filled(t_table *p, int limit, sem_t *wait,
 						sem_t *ph);
 void				only_one_philo(t_table *p, sem_t *wait);
+void				*philo(void *ph);
+int					check_arg(char **argv);
 
 #endif

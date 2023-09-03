@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:41:37 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 14:31:40 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:29:01 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,15 @@ typedef struct s_table
 	int				i;
 	int				j;
 	int				k;
-	struct timeval	b_eat;
 }					t_table;
 
 int					ft_atoi(const char *str);
 int					philo_eating(t_table *p);
 int					philo_sleeping(t_table *p);
+int					check_death(t_table *p, int i);
 int					get_time(void);
 void				eat_timer(time_t time);
 void				*philo(void *ph);
 int					only_one_philo(t_table *p);
-int					check_if_filled(t_table *p, int limit);
-void				philo2(t_table *p, int i);
-time_t				ft_time(struct timeval a, struct timeval b);
-int					check_arg(char **argv);
 
 #endif

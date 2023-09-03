@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus_utils.c                                :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/26 19:02:36 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 13:27:14 by raitmous         ###   ########.fr       */
+/*   Created: 2023/02/24 18:11:34 by raitmous          #+#    #+#             */
+/*   Updated: 2023/02/26 21:24:12 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "philosopher.h"
 
 static size_t	ftatoi(char *s)
 {
@@ -56,16 +56,4 @@ int	ft_atoi(const char *str)
 	sign = 1;
 	r = ftatoi(s + i);
 	return (r);
-}
-
-void	only_one_philo(t_table *p, sem_t *wait)
-{
-	if (p->philo_count == 1)
-	{
-		printf("%ld %d is thinking\n", get_time() - p->time, 1);
-		time_frame(p->death_limit, get_time());
-		printf("%ld %d died\n", get_time() - p->time, 1);
-		sem_post(wait);
-		exit(0);
-	}
 }

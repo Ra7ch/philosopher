@@ -6,7 +6,7 @@
 /*   By: raitmous <raitmous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:40:50 by raitmous          #+#    #+#             */
-/*   Updated: 2023/03/04 15:22:24 by raitmous         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:36:35 by raitmous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,12 @@ t_table	*build_table(int philo, char **argv, int argc)
 
 void	sem_initialize(t_sem *sem, t_table *p)
 {
-	sem->ph = malloc(sizeof(sem_t));
-	sem->d = malloc(sizeof(sem_t));
-	sem->wait = malloc(sizeof(sem_t));
 	sem_unlink("/philo");
 	sem->ph = sem_open("/philo", O_CREAT, 0644, p->philo_count);
 	if (sem->ph == SEM_FAILED)
 		exit(1);
-	sem_unlink("/dead2");
-	sem->d = sem_open("/dead2", O_CREAT, 0644, 1);
+	sem_unlink("/dead");
+	sem->d = sem_open("/dead", O_CREAT, 0644, 1);
 	if (sem->d == SEM_FAILED)
 		exit(1);
 	sem_unlink("/wait");
@@ -84,7 +81,7 @@ void	sem_initialize(t_sem *sem, t_table *p)
 	sem->time = get_time();
 }
 
-void	philo_processes(t_table *p, t_sem *sem, pid_t *pid)
+void	philo_processes(t_table *p, t_table *tmp, t_sem *sem, pid_t *pid)
 {
 	int	i;
 
@@ -121,19 +118,16 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc == 5 || argc == 6)
 	{
-		if (check_arg(argv) == 0)
-			return (0);
 		p = build_table(atoi(argv[1]), argv, argc);
 		pid = malloc(sizeof(pid_t) * (p->philo_count));
 		tmp = p;
 		sem_initialize(&sem, p);
-		philo_processes(p, &sem, pid);
+		philo_processes(p, tmp, &sem, pid);
 		sem_close(sem.ph);
 		sem_unlink("/philo");
 		sem_close(tmp->dead);
 		sem_unlink("/check_dead");
-		sem_close(sem.d);
 	}
 	else
-		printf("ERROR:\nUnvalid number of arguments.\n");
+		printf("Unvalid number of arguments\n");
 }
